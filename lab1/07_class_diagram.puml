@@ -1,0 +1,112 @@
+@startuml
+
+class ProgramParticipant {
+  -id: String
+  -email: String
+  -password: String
+  -fullName: String
+  -phoneNumber: String
+  -registrationDate: Date
+  -status: Status
+  +register()
+  +login()
+  +updateProfile()
+  +requestCard()
+  +getCards()
+  +getRewards()
+  +redeemReward()
+}
+
+class Card {
+  -id: String
+  -cardNumber: String
+  -balance: Integer
+  -issueDate: Date
+  -expiryDate: Date
+  -status: Status
+  +activate()
+  +block()
+  +getBalance()
+  +addTokens()
+  +spendTokens()
+  +getOperations()
+}
+
+class Operation {
+  -id: String
+  -type: OperationType
+  -amount: Integer
+  -date: DateTime
+  -status: Status
+  -description: String
+  +create()
+  +process()
+  +cancel()
+  +getStatus()
+  +updateStatus()
+}
+
+class Reward {
+  -id: String
+  -name: String
+  -description: String
+  -cost: Integer
+  -status: Status
+  -issueDate: Date
+  -expiryDate: Date
+  +create()
+  +issue()
+  +use()
+  +cancel()
+  +checkValidity()
+  +getStatus()
+}
+
+class Rule {
+  -id: String
+  -name: String
+  -description: String
+  -conditions: String
+  -status: Status
+  -startDate: Date
+  -endDate: Date
+  +create()
+  +activate()
+  +deactivate()
+  +checkConditions()
+  +apply()
+  +getStatus()
+}
+
+class RewardType {
+  -id: String
+  -name: String
+  -description: String
+  -category: String
+  -status: Status
+  +create()
+  +activate()
+  +deactivate()
+  +getRules()
+  +addRule()
+  +removeRule()
+}
+
+enum Status {
+  ACTIVE
+  BLOCKED
+  INACTIVE
+}
+
+enum OperationType {
+  DEPOSIT
+  PURCHASE
+}
+
+ProgramParticipant "1" -- "1..*" Card : has
+ProgramParticipant "1" -- "0..*" Reward : receives
+Card "1" -- "0..*" Operation : performs
+Rule "1" -- "0..*" Reward : applies to
+RewardType "1" -- "1..*" Rule : has
+
+@enduml 

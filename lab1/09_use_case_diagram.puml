@@ -1,0 +1,33 @@
+@startuml
+
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Участник программы" as participant
+
+rectangle "Программа лояльности" {
+  usecase "Регистрация участника программы" as UC1
+  usecase "Выпуск карты лояльности" as UC2
+  usecase "Пополнение карты" as UC3
+  usecase "Совершение покупки" as UC4
+  usecase "Получение вознаграждения" as UC5
+  usecase "Просмотр истории операций" as UC6
+  usecase "Просмотр доступных вознаграждений" as UC7
+}
+
+participant --> UC1
+'participant --> UC2
+'participant --> UC3
+'participant --> UC4
+'participant --> UC5
+'participant --> UC6
+'participant --> UC7
+
+UC1 ..> UC2 : <<include>>
+UC2 ..> UC3 : <<include>>
+UC2 ..> UC4 : <<include>>
+UC2 ..> UC5 : <<include>>
+UC2 ..> UC6 : <<include>>
+UC2 ..> UC7 : <<include>>
+
+@enduml 
