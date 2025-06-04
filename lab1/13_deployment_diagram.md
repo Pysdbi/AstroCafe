@@ -1,41 +1,36 @@
 # Диаграмма развертывания
 
+```mermaid
+graph LR
+    
+    subgraph "Клиентский уровень"
+        A(WEB)
+        B(Mobile)
+    end
+
+    subgraph "Серверный уровень"
+        C{Nginx}
+        D[Node.js Application]
+        E[(PostgreSQL)]
+        F[(Redis)]
+    end
+
+    subgraph "Внешние системы"
+        G[Платежная система]
+        H[Система учета продаж]
+    end
+
+    A --> C
+    B --> C
+    C --> D
+    D --> E
+    D --> F
+    D --> G
+    D --> H
+```
+
 ## Описание
 Диаграмма развертывания показывает физическую архитектуру системы программы лояльности "Астрокофе", включая узлы, компоненты и их взаимосвязи.
-
-## Диаграмма
-```plantuml
-@startuml
-!theme plain
-skinparam componentStyle rectangle
-
-node "Клиентский уровень" {
-  [Веб-браузер]
-  [Мобильное приложение]
-}
-
-node "Серверный уровень" {
-  [Nginx] as nginx
-  [Node.js Application] as app
-  [PostgreSQL] as db
-  [Redis] as cache
-}
-
-node "Внешние системы" {
-  [Платежная система]
-  [Система учета продаж]
-}
-
-[Веб-браузер] --> nginx
-[Мобильное приложение] --> nginx
-nginx --> app
-app --> db
-app --> cache
-app --> [Платежная система]
-app --> [Система учета продаж]
-
-@enduml
-```
 
 ## Компоненты системы
 
