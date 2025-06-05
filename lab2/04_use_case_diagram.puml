@@ -1,0 +1,95 @@
+@startuml
+skinparam packageStyle rectangle
+left to right direction
+
+title Сайт программы лояльности сети "Астрокофе"
+
+' Определение акторов
+actor "Посетитель" as Visitor
+actor "Участник программы" as Member
+actor "Менеджер" as Manager
+actor "Банковская система" as Bank
+actor "Система учета продаж" as Sales
+actor "Время" as Time
+
+
+' Определение границ системы
+package "Сайт программы лояльности" {
+    ' Варианты использования для Посетителя
+    usecase "Создать учетную запись" as UC1
+    usecase "Просмотреть статьи сайта" as UC2
+
+    ' Варианты использования для Участника программы
+    usecase "Войти в систему" as UC3
+    usecase "Изменить сведения в учетной записи" as UC4
+    usecase "Добавить новую карту" as UC5
+    usecase "Заблокировать карту" as UC6
+    usecase "Пополнить баланс карты" as UC7
+    usecase "Просмотреть операции по карте" as UC8
+    usecase "Просмотреть количество фишек" as UC9
+    usecase "Просмотреть список вознаграждений" as UC10
+    usecase "Распечатать листовку" as UC11
+
+    ' Варианты использования для Системы учета продаж
+    usecase "Передать сведения о покупках" as UC12
+    usecase "Передать сведения об использованных вознаграждениях" as UC13
+    usecase "Проверить карту лояльности" as UC14
+    usecase "Проверить вознаграждение" as UC15
+
+    ' Варианты использования для Менеджера
+    usecase "Завести новое правило" as UC16
+    usecase "Изменить имеющееся правило" as UC17
+    usecase "Добавить новый вид вознаграждения" as UC18
+    usecase "Изменить сведения о вознаграждении" as UC19
+    usecase "Опубликовать статью" as UC20
+    usecase "Изменить статью" as UC21
+    usecase "Удалить статью" as UC22
+    usecase "Внести изменения в учетную запись" as UC23
+    usecase "Заблокировать учетную запись" as UC24
+
+    ' Варианты использования для Времени
+    usecase "Начислить вознаграждение по дате рождения" as UC25
+}
+
+' Связи Посетителя
+Visitor --> UC1
+Visitor --> UC2
+
+' Связи Участника программы
+Member --> UC3
+Member --> UC4
+Member --> UC5
+Member --> UC6
+Member --> UC7
+Member --> UC8
+Member --> UC9
+Member --> UC10
+Member --> UC11
+
+' Связи Менеджера
+Manager --> UC16
+Manager --> UC17
+Manager --> UC18
+Manager --> UC19
+Manager --> UC20
+Manager --> UC21
+Manager --> UC22
+Manager --> UC23
+Manager --> UC24
+
+' Связи Банковской системы
+Bank --> UC7
+
+' Связи Системы учета продаж
+Sales --> UC12
+Sales --> UC13
+Sales --> UC14
+Sales --> UC15
+
+' Связи Времени
+Time --> UC25
+
+' Наследование
+Member --|> Visitor
+
+@enduml 
